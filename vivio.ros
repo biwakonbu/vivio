@@ -1,0 +1,18 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#| <Put a one-line description here>
+exec ros -Q -- $0 "$@"
+|#
+
+(require 'ltk)
+
+(defpackage :vivio
+  (:use :common-lisp :cl-user :ltk))
+
+(in-package :vivio)
+
+(defun main (&rest argv)
+  (declare (ignorable argv))
+  (with-ltk ()
+    (wm-title *tk* "vivio")
+    (bind *tk* "<Control-x><Control-c>" (lambda (event) (setf *exit-mainloop* t)))))
