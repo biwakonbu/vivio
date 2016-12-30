@@ -15,4 +15,5 @@ exec ros -Q -- $0 "$@"
   (declare (ignorable argv))
   (with-ltk ()
     (wm-title *tk* "vivio")
+    (set-geometry-wh *tk* 640 480)
     (bind *tk* "<Control-x><Control-c>" (lambda (event) (setf *exit-mainloop* t)))))
