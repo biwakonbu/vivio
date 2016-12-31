@@ -16,4 +16,7 @@ exec ros -Q -- $0 "$@"
   (with-ltk ()
     (wm-title *tk* "vivio")
     (set-geometry-wh *tk* 640 480)
-    (bind *tk* "<Control-x><Control-c>" (lambda (event) (setf *exit-mainloop* t)))))
+    (bind *tk* "<Control-x><Control-c>" (lambda (event) (setf *exit-mainloop* t)))
+    (let* ((frame (make-instance 'frame))
+           (text-buffer (make-instance 'text :master frame :background 'white)))
+      (pack (list frame text-buffer) :fill :both :expand t))))
