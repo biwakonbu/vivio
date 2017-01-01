@@ -7,9 +7,21 @@ exec ros -Q -- $0 "$@"
 (require :cl-cffi-gtk)
 
 (defpackage :vivio
-  (:use :common-lisp :cl-user :gtk))
+  (:use :cl-user :gtk :gdk-pixbuf :gobject
+   :glib :gio :pango :cairo :common-lisp))
 
 (in-package :vivio)
 
+(defun example-simple-window ()
+  (within-main-loop
+    (let ((window (gtk-window-new :toplevel)))
+      (g-signal-connect window "destroy"
+                        (lambda (widget)
+                          (declare (ignore widget))
+                          (leave-gtk-main)))
+      (gtk-widget-show-all window))))
+
 (defun main (&rest argv)
-  (declare (ignorable argv)))
+  (declare (ignorable argv))
+  (example-simple-window)
+  (loop (sleep 1)))
