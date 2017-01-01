@@ -4,23 +4,12 @@
 exec ros -Q -- $0 "$@"
 |#
 
-(require 'ltk)
+(require :cl-cffi-gtk)
 
 (defpackage :vivio
-  (:use :common-lisp :cl-user :ltk))
+  (:use :common-lisp :cl-user :gtk))
 
 (in-package :vivio)
 
 (defun main (&rest argv)
-  (declare (ignorable argv))
-  (with-ltk ()
-    (wm-title *tk* "vivio")
-    (set-geometry-wh *tk* 640 480)
-    (bind *tk* "<Control-x><Control-c>" (lambda (event) (setf *exit-mainloop* t)))
-    (let* ((frame (make-instance 'frame))
-           (text-buffer (make-instance 'text :master frame :background 'white))
-           (mode-line (make-instance 'frame))
-           (mini-frame (make-instance 'frame))
-           (mini-buffer (make-instance 'entry)))
-      (pack (list frame text-buffer mode-line) :side :top :fill :both :expand t)
-      (pack (list mini-frame mini-buffer) :side :bottom :fill :both))))
+  (declare (ignorable argv)))
