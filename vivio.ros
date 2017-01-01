@@ -14,7 +14,11 @@ exec ros -Q -- $0 "$@"
 
 (defun example-simple-window ()
   (within-main-loop
-    (let ((window (gtk-window-new :toplevel)))
+    (let ((window (make-instance 'gtk-window
+                                 :type :toplevel
+                                 :title "vivio"
+                                 :default-width 640
+                                 :default-height 480)))
       (g-signal-connect window "destroy"
                         (lambda (widget)
                           (declare (ignore widget))
@@ -24,4 +28,4 @@ exec ros -Q -- $0 "$@"
 (defun main (&rest argv)
   (declare (ignorable argv))
   (example-simple-window)
-  (loop (sleep 1)))
+  (gtk-main))
