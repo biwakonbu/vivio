@@ -12,20 +12,23 @@ exec ros -Q -- $0 "$@"
 
 (in-package :vivio)
 
-(defun example-simple-window ()
-  (within-main-loop
-    (let ((window (make-instance 'gtk-window
-                                 :type :toplevel
-                                 :title "vivio"
-                                 :default-width 640
-                                 :default-height 480)))
-      (g-signal-connect window "destroy"
-                        (lambda (widget)
-                          (declare (ignore widget))
-                          (leave-gtk-main)))
-      (gtk-widget-show-all window))))
+(defun vivio-window ()
+  (let* ((window (make-instance 'gtk-window
+                                :type :toplevel
+                                :title "vivio"
+                                :default-width 640
+                                :default-height 480))
+         (view (make-instance 'gtk-text-view))
+         (buffer (gtk-text-view-buffer view)))
+    (g-signal-connect window "destroy"
+                      (lambda (widget)
+                        (declare (ignore widget))
+                        (leave-gtk-main)))
+    (gtk-text-buffer-set-text buffer "sample text.")
+    (gtk-container-add window view)
+    (gtk-widget-show-all window)))
 
 (defun main (&rest argv)
   (declare (ignorable argv))
-  (example-simple-window)
+  (vivio-window)
   (gtk-main))
