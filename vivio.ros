@@ -3,45 +3,11 @@
 #| <Put a one-line description here>
 exec ros -Q -- $0 "$@"
 |#
-
-(require :cl-cffi-gtk)
-
-(defpackage :vivio
-  (:use :cl-user :gtk :gdk-pixbuf :gobject
-   :glib :gio :pango :cairo :common-lisp))
-
-(in-package :vivio)
-
-(defun vivio-window ()
-  (let* ((window (make-instance 'gtk-window
-                                :type :toplevel
-                                :title "vivio"
-                                :default-width 640
-                                :default-height 480))
-         ;;(statusbar-size (make-gtk-requisition :width 640 :height 20))
-         ;; vertical box container
-         (vbox (make-instance 'gtk-vbox nil 0))
-         ;; mode line view
-         (mini-buffer (make-instance 'gtk-text-view))
-         ;; text editor area
-         (view (make-instance 'gtk-text-view))
-         (buffer (gtk-text-view-buffer view))
-         ;; status bar
-         (status (make-instance 'gtk-statusbar)))
-    (g-signal-connect window "destroy"
-                      (lambda (widget)
-                        (declare (ignore widget))
-                        (leave-gtk-main)))
-    (gtk-text-buffer-set-text buffer "sample text.")
-    (gtk-container-add window vbox)
-    (gtk-box-pack-start vbox view)
-    (setf (gtk-widget-size-request status) '(640 10))
-    (gtk-box-pack-start vbox status :expand nil :fill nil :padding 0)
-    ;;(gtk-box-pack-start vbox mini-buffer)
-    (gtk-statusbar-push status 0 "col: .. ln: ..")
-    (gtk-widget-show-all window)))
+(load (make-pathname :defaults *load-pathname* :name "vivio" :type "asd"))
+(ql:quickload :vivio :silent t)
 
 (defun main (&rest argv)
   (declare (ignorable argv))
-  (vivio-window)
-  (gtk-main))
+  (term-init)
+  (display-init))
+;;; vim: set ft=lisp lisp:
