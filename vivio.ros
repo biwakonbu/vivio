@@ -8,6 +8,5 @@ exec ros -Q -- $0 "$@"
 
 (defun main (&rest argv)
   (declare (ignorable argv))
-  (term-init)
-  (display-init))
+  (vivio-cui:init-screen))
 ;;; vim: set ft=lisp lisp:

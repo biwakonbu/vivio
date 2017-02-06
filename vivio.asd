@@ -1,4 +1,4 @@
-(cl:in-package :cl-user)
+(in-package :cl-user)
 
 #-asdf(require :asdf)
 #-uiop(require :uiop)
@@ -12,7 +12,9 @@
   :serial t
   :components ((:module "src"
                 :serial t
-                :components ((:file "term")
+                :components ((:file "package")
+                             (:file "vivio")
+                             (:file "term")
                              (:file "window"))))
   :depends-on (:uiop
                :cl-ncurses
