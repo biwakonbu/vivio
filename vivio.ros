@@ -4,9 +4,11 @@
 exec ros -Q -- $0 "$@"
 |#
 (load (make-pathname :defaults *load-pathname* :name "vivio" :type "asd"))
-(ql:quickload :vivio :silent t)
+(ql:quickload :vivio)
 
 (defun main (&rest argv)
   (declare (ignorable argv))
-  (vivio-cui:init-screen))
+  (unwind-protect
+       (vivio-cui:init-screen)
+    (vivio-cui:end-screen)))
 ;;; vim: set ft=lisp lisp:

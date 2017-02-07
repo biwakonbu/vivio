@@ -1,7 +1,10 @@
 (in-package :vivio-cui)
 
-(export '(init-screen))
+(export '(init-screen
+          end-screen))
 
 (defun init-screen ()
-  (initscr)
+  (initscr))
+
+(defun end-screen ()
   (endwin))
