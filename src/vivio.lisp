@@ -4,7 +4,7 @@
           end-screen))
 
 (defun init-screen ()
-  (initscr))
+  (charms/ll:initscr))
 
 (defun end-screen ()
-  (endwin))
+  (charms/ll:endwin))
