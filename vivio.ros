@@ -4,7 +4,7 @@
 exec ros -Q -- $0 "$@"
 |#
 (load (make-pathname :defaults *load-pathname* :name "vivio" :type "asd"))
-(ql:quickload :vivio)
+(ql:quickload :vivio :silent t)
 
 (defun main (&rest argv)
   (declare (ignorable argv))
