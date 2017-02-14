@@ -1,9 +1,12 @@
 (in-package :vivio-cui)
 
-(export '(init-screen
+(export '(*current-buffer*
+          init-screen
+          init-window
           end-screen))
 
 (defparameter *raw-mode* nil)
+(defvar *current-buffer*)
 
 (defun raw-p ()
   *raw-mode*)
@@ -26,6 +29,10 @@
   (charms/ll:refresh)
   ;; 特殊キーの読取を on にする
   (charms/ll:keypad charms/ll:*stdscr* charms/ll:TRUE))
+
+(defun init-window ()
+  (setq *current-buffer* (charms/ll:newwin charms/ll:*lines* charms/ll:*cols* 0 0))
+  (charms/ll:wrefresh *current-buffer*))
 
 (defun end-screen ()
   (charms/ll:endwin))
