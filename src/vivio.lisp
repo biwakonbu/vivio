@@ -5,17 +5,17 @@
           init-window
           end-screen))
 
-(defparameter *raw-mode* nil)
 (defvar *current-buffer*)
 
-(defun raw-p ()
-  *raw-mode*)
-(defun raw ()
-  (setq *raw-mode* t)
-  (charms/ll:raw))
-(defun noraw ()
-  (setq *raw-mode* nil)
-  (charms/ll:noraw))
+(let ((raw-mode nil))
+  (defun raw-p ()
+    raw-mode)
+  (defun raw ()
+    (setq raw-mode t)
+    (charms/ll:raw))
+  (defun noraw ()
+    (setq raw-mode nil)
+    (charms/ll:noraw)))
 
 (defun init-screen ()
   (charms/ll:initscr)
