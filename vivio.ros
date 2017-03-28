@@ -13,9 +13,9 @@ exec ros -Q -- $0 "$@"
         (vivio-cui:init-screen)
         (vivio-cui:init-window)
         (loop :named mainloop
-              :for ch := (charms/ll:getch)
-              :do (progn
-                    (charms/ll:waddch vivio-cui:*current-buffer* ch)
-                    (charms/ll:wrefresh vivio-cui:*current-buffer*))))
+           :for ch := (charms:getch charms:*standard-window* :ignore-error t)
+           :do (progn
+                 (charms/ll:waddch vivio-cui:*current-buffer* ch)
+                 (charms/ll:wrefresh vivio-cui:*current-buffer*))))
     (vivio-cui:end-screen)))
 ;;; vim: set ft=lisp lisp:
